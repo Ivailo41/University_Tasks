@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-void Task1();
-void Task2();
-void Task7();
+void Task1(); // Takes years inputs based on integer and prints out how many of the years have 366 days
+void Task2(); // Prints all prime numbers in given range
+void Task7(); // Makes input x input table with ascending numbers in snake pattern
 
 int main()
 {

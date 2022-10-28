@@ -2,18 +2,6 @@
 #include <cmath>
 using namespace std;
 
-
-//task container
-void zad1()
-{
-    int n;
-    cin >> n;
-
-    printPrimeNumsToRange(n);
-}
-//end of task container
-
-
 bool isPrime(int num)
 {
     int sqrtOfNum = sqrt(num);
@@ -23,6 +11,48 @@ bool isPrime(int num)
         return false;
     }
     return true;
+}
+
+bool isSufix(int number, int sufix)
+{
+
+    if(sufix == 0)
+    {
+        if(number % 10 == 0)
+        return true;
+        else
+        return false;
+    }
+
+    do
+    {
+        if(number%10 != sufix%10)
+        return false;
+        else
+        number /= 10;
+        sufix /= 10;
+    }
+    while(sufix > 0);
+
+    return true;
+}
+
+int reverseNumber(int num)
+{
+    int result = 0;
+    while(num > 0)
+    {
+        result *= 10;
+        result += num % 10;
+        num /= 10;
+    }
+
+    return result;
+}
+
+bool isPalindrom(int num)
+{
+    return num == reverseNumber(num);
 }
 
 void printPrimeNumsToRange(int range)
@@ -43,5 +73,9 @@ void printPrimeNumsToRange(int range)
 
 int main()
 {
-    
+    int n, k;
+    cin >> n >> k;
+    n = reverseNumber(n);
+    k = reverseNumber(k);
+    cout << boolalpha << isSufix(n,k);
 }

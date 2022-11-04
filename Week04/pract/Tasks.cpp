@@ -125,7 +125,49 @@ void task0() // checks if inputed number contains 1
     cout << boolalpha << contains1;
 }
 
+void zad4()
+{
+    int length, sum;
+    bool startSum = false;
+    cin >> length;
+
+    int arr[100];
+
+    for (size_t i = 0; i < length; i++)
+    {
+        cin >> arr[i];
+
+        sum += arr[i] * startSum;
+
+        if(arr[i] < 0 && !startSum)
+        startSum = true;
+    }
+
+    cout << sum;
+    
+}
+
+void zad5()
+{
+    int length;
+    int arr[100];
+
+    cin >> length;
+
+    for (size_t i = 0; i < length; i++)
+    {
+        cin >> arr[i];
+    }
+
+    for (size_t i = length; i > 0; i--)
+    {
+       cout << arr[i-1]; 
+    }
+    
+    
+}
+
 int main()
 {
-    task0();
+    zad5();
 }

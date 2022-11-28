@@ -211,7 +211,7 @@ void insertSortArr(int arr[], int arrLength)
 {
     for (size_t i = 1; i < arrLength;)
     {
-        if(arr[i] < arr[i-1])
+        if(arr[i] < arr[i-1] && i > 0)
         {
             switchNum(arr[i], arr[i-1]);
             i--;
@@ -234,8 +234,8 @@ void printArray(const int arr[], int arrLength)
 
 int main()
 {
-    const int ARR_LENGTH = 8;
-    int bubbleArr[ARR_LENGTH] = {75,2,8,3,14,5,23,18};
+    const int ARR_LENGTH = 12;
+    int bubbleArr[ARR_LENGTH] = {7, 9, 15, 24, 26, 28, 40, 41, 55, 67, 72, 77};
     insertSortArr(bubbleArr, ARR_LENGTH);
     printArray(bubbleArr, ARR_LENGTH);
 }

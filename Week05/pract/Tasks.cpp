@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 
-void switchNum(int& a, int& b)
+void switchNum(int &a, int &b)
 {
     int temp = a;
     a = b;
     b = temp;
 }
-//END OF TASK 0
+// END OF TASK 0
 double Pow(double num, int exp)
 {
     for (size_t i = 0; i < exp; i++)
@@ -15,7 +15,6 @@ double Pow(double num, int exp)
         num *= num;
     }
     return num;
-    
 }
 
 double Min(double a, double b)
@@ -48,7 +47,7 @@ bool isDigit(char symb)
 {
     return '0' <= symb && symb <= '9';
 }
-//END OF TASK 1
+// END OF TASK 1
 void printMatrix(int rows, int columns)
 {
     int matrix[100][100];
@@ -57,14 +56,13 @@ void printMatrix(int rows, int columns)
     {
         for (size_t j = 1; j <= columns; j++)
         {
-            if(j > i)
-            matrix[i][j] = j - i; 
-            else if(j < i)
-            matrix[i][j] = i * j;
+            if (j > i)
+                matrix[i][j] = j - i;
+            else if (j < i)
+                matrix[i][j] = i * j;
             else
-            matrix[i][j] = i;
+                matrix[i][j] = i;
         }
-        
     }
 
     for (size_t i = 1; i <= rows; i++)
@@ -74,17 +72,14 @@ void printMatrix(int rows, int columns)
             cout << matrix[i][j] << " ";
         }
         cout << endl;
-        
     }
-    
-    
 }
-//END OF TASK 2
+// END OF TASK 2
 double square(double num)
 {
     return num * num;
 }
-//END OF TASK 3
+// END OF TASK 3
 void multyplyArr(int arr[], int arrLength, double multiplier)
 {
     for (size_t i = 0; i < arrLength; i++)
@@ -100,27 +95,27 @@ void multyplyArr(double arr[], int arrLength, double multiplier)
         arr[i] *= multiplier;
     }
 }
-//END OF TASK 4
+// END OF TASK 4
 bool isArrSortedDecreasing(const int arr[], int length)
 {
-    for(size_t i = 1; i < length; i++)
+    for (size_t i = 1; i < length; i++)
     {
-        if(arr[i-1] < arr[i])
-        return false;
+        if (arr[i - 1] < arr[i])
+            return false;
 
         return true;
     }
 }
-//END OF TASK 5
+// END OF TASK 5
 int countWords(const char textArr[], int arrLength)
-{   
+{
     int wordCount = 1;
     bool deadSpace = true;
     for (size_t i = 0; i < arrLength; i++)
     {
-        if(textArr[i] == ' ')
+        if (textArr[i] == ' ')
         {
-            if(deadSpace == false)
+            if (deadSpace == false)
             {
                 wordCount++;
             }
@@ -132,24 +127,22 @@ int countWords(const char textArr[], int arrLength)
         }
     }
     return wordCount;
-    
 }
-//END OF TASK 6
+// END OF TASK 6
 int countDigits(const char arr[], int arrLength)
 {
     int digitCount = 0;
 
     for (size_t i = 0; i < arrLength; i++)
     {
-        if(isDigit(arr[i]))
+        if (isDigit(arr[i]))
         {
             digitCount++;
         }
     }
     return digitCount;
-    
 }
-//END OF TASK 7
+// END OF TASK 7
 bool isLowerCase(char symb)
 {
     return 'a' <= symb && symb <= 'z';
@@ -157,26 +150,25 @@ bool isLowerCase(char symb)
 
 bool canBeVarName(const char arr[], int arrLength)
 {
-    if(isLowerCase(arr[0]) && countWords(arr, arrLength) <= 1)
-    return true;
+    if (isLowerCase(arr[0]) && countWords(arr, arrLength) <= 1)
+        return true;
     else
-    return false;
+        return false;
 }
-//END OF TASK 8
+// END OF TASK 8
 int indexOfMin(int arr[], int arrLength, int searchStart)
 {
     int currentMin = arr[searchStart];
     int minIndex = searchStart;
     for (size_t i = searchStart; i < arrLength; i++)
     {
-        if(arr[i] < currentMin)
+        if (arr[i] < currentMin)
         {
             currentMin = arr[i];
             minIndex = i;
         }
     }
     return minIndex;
-    
 }
 
 void bubbleSortArr(int arr[], int arrLength)
@@ -185,16 +177,15 @@ void bubbleSortArr(int arr[], int arrLength)
     do
     {
         swapped = false;
-        for (size_t i = 0; i < arrLength-1; i++)
+        for (size_t i = 0; i < arrLength - 1; i++)
         {
-            if(arr[i] > arr[i+1])
+            if (arr[i] > arr[i + 1])
             {
-                switchNum(arr[i], arr[i+1]);
+                switchNum(arr[i], arr[i + 1]);
                 swapped = true;
             }
         }
-    }
-    while(swapped);
+    } while (swapped);
 }
 
 void selectionSortArr(int arr[], int arrLength)
@@ -204,16 +195,15 @@ void selectionSortArr(int arr[], int arrLength)
         int minIndex = indexOfMin(arr, arrLength, i);
         switchNum(arr[i], arr[minIndex]);
     }
-    
 }
 
 void insertSortArr(int arr[], int arrLength)
 {
     for (size_t i = 1; i < arrLength;)
     {
-        if(arr[i] < arr[i-1] && i > 0)
+        if (arr[i] < arr[i - 1] && i > 0)
         {
-            switchNum(arr[i], arr[i-1]);
+            switchNum(arr[i], arr[i - 1]);
             i--;
         }
         else
@@ -221,9 +211,8 @@ void insertSortArr(int arr[], int arrLength)
             i++;
         }
     }
-    
 }
-//END OF TASK BONUS 1
+// END OF TASK BONUS 1
 void printArray(const int arr[], int arrLength)
 {
     for (size_t i = 0; i < arrLength; i++)

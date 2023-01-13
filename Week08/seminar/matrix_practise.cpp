@@ -4,6 +4,8 @@ using namespace std;
 const short MAX_ROW = 100;
 const short MAX_COL = 100;
 
+const short SQUARE_MAX_SIZE = 100;
+
 // SORTING MATRIX FUNCTIONS
 void swapNumbers(int &a, int &b)
 {
@@ -28,7 +30,7 @@ void selectionSort(int *arr, short arrSize)
     }
 }
 
-void printArr(const int arr[], short arrSize)
+void printArr(const int *arr, short arrSize)
 {
     for (size_t i = 0; i < arrSize; i++)
     {
@@ -89,9 +91,23 @@ void sortMatrix(int matrix[MAX_ROW][MAX_COL], short size)
     }
 }
 
+// Other matrix functions
+void rotateSquareMatrix(int matrix[][SQUARE_MAX_SIZE], short size)
+{
+    int rotatedMatrix[SQUARE_MAX_SIZE][SQUARE_MAX_SIZE];
+
+    for (size_t i = 0; i < size; i++)
+    {
+        for (size_t j = i; j < size; j++)
+        {
+            swapNumbers(matrix[i][j], matrix[j][i]);
+        }
+    }
+}
+
 int main()
 {
-    const int MATRIX_SIZE = 5;
+    const short MATRIX_SIZE = 5;
     int matrix[MAX_ROW][MAX_COL] = {{10, 2, 46, 13, 5},
                                     {8, 53, 6, 32, 89},
                                     {7, 8, 19, 23, 76},
@@ -99,5 +115,6 @@ int main()
                                     {11, 9, 33, 54, 78}};
 
     sortMatrix(matrix, MATRIX_SIZE);
+    rotateSquareMatrix(matrix, MATRIX_SIZE);
     printMatrix(matrix, MATRIX_SIZE);
 }

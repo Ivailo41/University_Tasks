@@ -1,120 +1,101 @@
 #include <iostream>
-
 using namespace std;
 
-int boardSize;
+size_t boardSize;
 
-int dx[] = {2, 2, 1, -1, -2, -2, -1, 1}; // Possible x-coordinate moves for a knight
-int dy[] = {1, -1, -2, -2, -1, 1, 2, 2}; // Possible y-coordinate moves for a knight
-
-bool isInside(int x, int y)
-{
-    return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
-}
-
-bool isVisited(short **board, short x, short y)
-{
-}
-
-// Function to check if a knight can reach every square on the chess board
-bool dfs(int visited[][N], short **board, int x, int y, int move)
-{
-    // Mark the current square as visited and store the move number in path array
-    visited[x][y] = 1;
-    path[x][y] = move;
-
-    // Check if all squares on the chess board have been visited
-    for (int i = 0; i < boardSize; i++)
-    {
-        for (int j = 0; j < boardSize; j++)
-        {
-            if (board[i][j] != -1)
-            {
-                bool found = false;
-                // Try moving to all 8 possible squares
-                for (int k = 0; k < 8; k++)
-                {
-                    short x2 = x + dx[k];
-                    short y2 = y + dy[k];
-                    if (isInside(x2, y2) && !visited[x2][y2])
-                    {
-                        found = true;
-                        if (dfs(visited, path, x2, y2, move + 1))
-                        {
-                            return true;
-                        }
-                    }
-                }
-                if (!found)
-                {
-                    return false;
-                }
-            }
-        }
-    }
-    return true;
-}
-
-short **initialiseBoard()
+void initialiseBoard(short **&chessBoard)
 {
     cout << "Enter board size: ";
     cin >> boardSize;
 
-    short **chessBoard = new short *[boardSize];
+    chessBoard = new short *[boardSize];
     for (int i = 0; i < boardSize; i++)
     {
         chessBoard[i] = new short[boardSize];
-
+    }
+    // initializing chess board
+    for (int i = 0; i < boardSize; i++)
+    {
         for (int j = 0; j < boardSize; j++)
         {
             chessBoard[i][j] = -1;
         }
     }
-
-    return chessBoard;
 }
 
-int main()
+bool dfs(short **chessBoard, int x, int y, int move_count)
 {
-    short **chess_board = initialiseBoard();
-    // initializing chess board
-    int visited[boardSize][boardSize],
-        for (int i = 0; i < N; i++)
+    if (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
     {
-        for (int j = 0; j < N; j++)
+        return false;
+    }
+    if (chessBoard[x][y] != -1)
+    {
+        return false;
+    }
+
+    chessBoard[x][y] = move_count;
+    if (move_count == boardSize * boardSize - 1)
+    {
+        return true;
+    }
+
+    int dx[] = {-2, -2, -1, -1, 1, 1, 2, 2};
+    int dy[] = {-1, 1, -2, 2, -2, 2, -1, 1};
+
+    for (int i = 0; i < 8; i++)
+    {
+        int new_x = x + dx[i];
+        int new_y = y + dy[i];
+
+        if (dfs(chessBoard, new_x, new_y, move_count + 1))
         {
-            visited[i][j] = 0;
+            return true;
         }
     }
-    // SEPARATE FUNCTION
 
-    int starting_x, starting_y;
-    cout << "Enter starting x coordinate for the knight: ";
-    cin >> starting_x;
-    cout << "Enter starting y coordinate for the knight: ";
-    cin >> starting_y;
-    // SEPARATE FUNCTION
+    chessBoard[x][y] = -1;
+    return false;
+}
 
-    bool can_visit_all = dfs(visited, path, starting_x, starting_y, 0);
-
-    if (can_visit_all)
+void deleteBoard(short **board)
+{
+    for (int i = 0; i < boardSize; i++)
     {
-        cout << "The knight can visit every square on the chess board without repeating any squares." << endl;
-        cout << "Path taken by the knight:" << endl;
-        for (int i = 0; i < N; i++)
+        delete[] board[i];
+    }
+
+    delete[] board;
+}
+
+void printPath(short **chessBoard, bool canVisitAll)
+{
+    if (canVisitAll)
+    {
+        cout << "There is solution!" << endl;
+
+        for (int i = 0; i < boardSize; i++)
         {
-            for (int j = 0; j < N; j++)
+            for (int j = 0; j < boardSize; j++)
             {
-                cout << path[i][j] << " ";
+                cout << chessBoard[i][j] << " ";
             }
             cout << endl;
         }
     }
     else
     {
-        cout << "The knight can not visit every square on the chess board without repeating any squares." << endl;
+        cout << "There is no solution!" << endl;
     }
-    // Separate function
+}
 
-    return 0;
+int main()
+{
+    short **chessBoard;
+    initialiseBoard(chessBoard);
+    bool canVisitAll = dfs(chessBoard, 0, 0, 0);
+
+    printPath(chessBoard, canVisitAll);
+
+    deleteBoard(chessBoard);
 }

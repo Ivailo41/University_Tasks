@@ -2,37 +2,40 @@
 
 using namespace std;
 
-const int N = 5; // Size of the chess board
+int boardSize;
 
 int dx[] = {2, 2, 1, -1, -2, -2, -1, 1}; // Possible x-coordinate moves for a knight
 int dy[] = {1, -1, -2, -2, -1, 1, 2, 2}; // Possible y-coordinate moves for a knight
 
-// Function to check if a given square is inside the chess board
 bool isInside(int x, int y)
 {
-    return x >= 0 && x < N && y >= 0 && y < N;
+    return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
+}
+
+bool isVisited(short **board, short x, short y)
+{
 }
 
 // Function to check if a knight can reach every square on the chess board
-bool dfs(int visited[][N], int path[][N], int x, int y, int move)
+bool dfs(int visited[][N], short **board, int x, int y, int move)
 {
     // Mark the current square as visited and store the move number in path array
     visited[x][y] = 1;
     path[x][y] = move;
 
     // Check if all squares on the chess board have been visited
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < boardSize; i++)
     {
-        for (int j = 0; j < N; j++)
+        for (int j = 0; j < boardSize; j++)
         {
-            if (!visited[i][j])
+            if (board[i][j] != -1)
             {
                 bool found = false;
                 // Try moving to all 8 possible squares
                 for (int k = 0; k < 8; k++)
                 {
-                    int x2 = x + dx[k];
-                    int y2 = y + dy[k];
+                    short x2 = x + dx[k];
+                    short y2 = y + dy[k];
                     if (isInside(x2, y2) && !visited[x2][y2])
                     {
                         found = true;
@@ -52,16 +55,35 @@ bool dfs(int visited[][N], int path[][N], int x, int y, int move)
     return true;
 }
 
+short **initialiseBoard()
+{
+    cout << "Enter board size: ";
+    cin >> boardSize;
+
+    short **chessBoard = new short *[boardSize];
+    for (int i = 0; i < boardSize; i++)
+    {
+        chessBoard[i] = new short[boardSize];
+
+        for (int j = 0; j < boardSize; j++)
+        {
+            chessBoard[i][j] = -1;
+        }
+    }
+
+    return chessBoard;
+}
+
 int main()
 {
+    short **chess_board = initialiseBoard();
     // initializing chess board
-    int visited[N][N], path[N][N];
-    for (int i = 0; i < N; i++)
+    int visited[boardSize][boardSize],
+        for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
         {
             visited[i][j] = 0;
-            path[i][j] = -1;
         }
     }
     // SEPARATE FUNCTION

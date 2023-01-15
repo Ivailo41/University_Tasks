@@ -3,8 +3,6 @@
 
 using namespace std;
 
-const size_t MAX_STRING_SIZE = 1000;
-
 bool isDigit(char ch)
 {
     return ch >= '0' && ch <= '9';

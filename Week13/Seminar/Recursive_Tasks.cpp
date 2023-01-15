@@ -11,20 +11,6 @@ size_t strlen(char *string)
     return result;
 }
 
-short getIndexOfElement(char *elements, char searchedChar)
-{
-    short result = 0;
-    while (elements[result] != '\0')
-    {
-        if (elements[result] == searchedChar)
-        {
-            return result;
-        }
-        result++;
-    }
-    return -1;
-}
-
 printBitstring(bool *bitString, char *elements, size_t size)
 {
     cout << '{';
@@ -43,10 +29,6 @@ void makeCombinations(char *elements, size_t n, bool *bitString, size_t pos)
 {
     if (pos == n)
     {
-        short excludeElemIndex = getIndexOfElement(elements, 'c');
-        if (bitString[excludeElemIndex] == 1)
-            return;
-
         printBitstring(bitString, elements, n);
         return;
     }
